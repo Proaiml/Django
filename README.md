@@ -13,7 +13,7 @@ Bu proje, Python'ın popüler web çatısı **Django**'nun temel mimarisi olan *
 | Rota (URL) | Görünüm Sınıfı | Şablon | Açıklama |
 | :--- | :--- | :--- | :--- |
 | `/` | `HomePageView` | `home.html` | Anasayfa karşılama ekranı |
-| `/about/` | `AboutPageView` | `about.html` | Kurumsal hakkımızda tanıtım sayfası |
+| `/about/` | `AboutPageView` | `about.html` | Hakkımızda tanıtım sayfası |
 | `/admin/` | Django Admin | Yerleşik | Django dahili yönetim paneli |
 
 ---
@@ -42,7 +42,8 @@ Django/
     │   ├── views.py       # TemplateView tabanlı sınıf görünümleri
     │   ├── urls.py        # Sayfa içi URL rotaları
     │   ├── models.py      # Veritabanı modelleri
-    │   └── admin.py       # Admin arayüzü kayıtları
+    │   ├── admin.py       # Admin arayüzü kayıtları
+    │   └── test_pages.py  # Sayfa testleri
     │
     └── templates/         # HTML şablonları
         ├── base.html      # Ortak menü ve iskelet (Template Inheritance)
@@ -88,6 +89,28 @@ Tarayıcınızdan **`http://127.0.0.1:8000/`** adresini ziyaret edebilirsiniz.
    ```
 
 2. **Şablon Kalıtımı (DRY Prensibi):** `base.html` içerisinde ortak menü barındırılmış; `home.html` ve `about.html` sayfaları bu yapıyı `{% extends "base.html" %}` ile miras alarak kod tekrarını önlemiştir.
+
+---
+
+## 🧪 Test
+
+```bash
+cd jang
+python manage.py test pages
+```
+
+Testler anasayfanın ve Hakkımızda sayfasının açıldığını ve ikisinin de ortak `base.html` şablonunu kullandığını denetler.
+
+---
+
+## ⚠️ Yayına almadan önce
+
+Bu proje bir geliştirme ve öğrenme projesidir. Ayarlar yerel çalışma içindir:
+
+- `settings.py` içindeki `SECRET_KEY` depoda açıkça duruyor. Yayında bu anahtarı ortam değişkeninden okuyun ve yeni bir anahtar üretin.
+- `DEBUG = True` hata ayrıntılarını ziyaretçiye gösterir; yayında `False` yapın.
+- `ALLOWED_HOSTS` boştur; yayındaki alan adını ekleyin.
+- `db.sqlite3` geliştirme veritabanıdır; yayında ayrı bir veritabanı kullanın.
 
 ---
 
